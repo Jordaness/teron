@@ -1,4 +1,5 @@
 import {Switch} from '../Interfaces/switch';
+import { FlashLight } from './flashlight'
 
 export class Laser implements Switch
 {
@@ -6,6 +7,7 @@ export class Laser implements Switch
      * Creates a laser
      */
     constructor() {
+
     }
 
     /**
@@ -27,5 +29,10 @@ export class Laser implements Switch
     */
     PewPew():void {
         console.log("The laser goes pew pew!");
-    }  
+    }
+
+    flashes():void {
+        FlashLight.flash();
+    }
+    
 }

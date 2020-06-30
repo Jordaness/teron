@@ -16,3 +16,5 @@ arr.forEach(sw => TurnOn(sw));
 function TurnOn(sw:Switch): void {
     sw.On();
 }
+
+pewpew.flashes()

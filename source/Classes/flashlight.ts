@@ -31,4 +31,10 @@ export class FlashLight extends Light implements Switch
     HiBeam(): void {
         console.log("The high beams are activated!");
     }
+    /**
+     Using Static method for flashlight
+     */
+    static flash(): void {
+        console.log("this is a static flash")
+    }
 }
