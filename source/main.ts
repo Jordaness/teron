@@ -3,18 +3,12 @@ import { FlashLight } from './Classes/flashlight';
 import { Laser } from './Classes/laser';
 import { Switch } from './Interfaces/switch';
 
-const beam = new Light("beam");
 const flash = new FlashLight();
-const pewpew = new Laser();
+const pp = new Laser("pp");
+const phaser = new Laser("phaser");
 
-const arr: Switch[] = [flash, pewpew];
-arr.forEach(sw => TurnOn(sw));
-
-// pewpew.PewPew();
-// flash.HiBeam();
+flash.TurnOnLaser(phaser);
 
 function TurnOn(sw:Switch): void {
-    sw.On();
+    sw.OnOffButton();
 }
-
-pewpew.flashes()

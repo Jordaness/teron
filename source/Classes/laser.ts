@@ -1,27 +1,30 @@
 import {Switch} from '../Interfaces/switch';
-import { FlashLight } from './flashlight'
 
 export class Laser implements Switch
 {
+    name: string;
+    private operational: boolean = false;
     /**
      * Creates a laser
      */
-    constructor() {
-
+    constructor(name:string) {
+        this.name = name;
     }
 
     /**
     * Turns on the laser
     */
-    On(): void {
-        console.log("The laser is now operational.")
+    private On(): void {
+        console.log(`${this.name} is now operational.`);
+        this.operational = true;
     }
 
     /**
     * Turns off the laser
     */
-    Off(): void {
+   private Off(): void {
         console.log("The laser is no longer operational.");
+        this.operational = false;
     }
 
     /**
@@ -31,8 +34,7 @@ export class Laser implements Switch
         console.log("The laser goes pew pew!");
     }
 
-    flashes():void {
-        FlashLight.flash();
+    OnOffButton():void {
+        this.operational == true ? this.Off() : this.On()
     }
-    
 }
