@@ -1,9 +1,12 @@
 import {Switch} from '../Interfaces/switch';
+import { LightGun } from './lightgun';
 
 export class Laser implements Switch
 {
     name: string;
+    private lightgun?: LightGun;
     private operational: boolean = false;
+
     /**
      * Creates a laser
      */
@@ -23,18 +26,56 @@ export class Laser implements Switch
     * Turns off the laser
     */
    private Off(): void {
-        console.log("The laser is no longer operational.");
+        console.log(`${this.name} is no longer operational.`);
         this.operational = false;
     }
 
     /**
-    * Pew Pew Pew
+    * A switch to turn the laser on and off
     */
-    PewPew():void {
-        console.log("The laser goes pew pew!");
-    }
-
     OnOffButton():void {
         this.operational == true ? this.Off() : this.On()
+    }
+
+    /**
+    * Will return true if the laser is currently attached to a gun
+    */
+    AttachedToGun(): boolean {
+        return this.lightgun !== undefined;
+    }
+
+    /**
+    * Will return true if the laser is currently operational
+    */
+    CurrentlyOperational(): boolean{
+        return this.operational;
+    }
+
+    /**
+    * Will return a laser gun
+    */
+    private static ConvertLaserToLG(name: string, laser: Laser): LightGun {
+        
+        if(!laser.AttachedToGun()){
+            laser.lightgun = LightGun.AttachLaserToLG(name, laser);
+        }
+
+        return <LightGun>laser.lightgun;
+    }
+
+    /**
+    * Uses the laser to make a weapon
+    */
+    MakeWeapon(name: string): void {
+        if(!this.AttachedToGun()) {
+           this.lightgun = Laser.ConvertLaserToLG(name, this);
+        }
+    }
+
+    Fire():void {
+        if(this.lightgun)
+            this.lightgun.PewPew();
+        else
+            console.log("This laser is not a weapon.");
     }
 }
